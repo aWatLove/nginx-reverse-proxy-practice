@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  app1:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - proxy
+    networks:
+      - mynetwork
+
+  app2:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - proxy
+    networks:
+      - mynetwork
+
+  app3:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - proxy
+    networks:
+      - mynetwork
+
+  proxy:
+    build:
+      context: nginx
+      dockerfile: Dockerfile
+    networks:
+      - mynetwork
+    ports:
+      - "3000:3000"
+
+
+volumes:
+  data:
+
+networks:
+  mynetwork:
+    driver: bridge
